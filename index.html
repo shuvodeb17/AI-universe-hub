@@ -47,37 +47,33 @@
               <div class="main-modal grid grid-cols-2 gap-2">
                 <div class="modal-left">
                     <a href="#" class="block p-6 bg-[#FEF7F7] border border-[#F29393] rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <h5 id="modal-left-description" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">ChatGPT is an AI-powered chatbot platform that uses OpenAI's GPT technology to simulate human conversation.</h5>
+                        <h5 id="modal-left-description" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
 
                          <!-- pricing -->
                         <div id="pricing-wrapper" class="grid grid-cols-3 gap-2">
-                            <div id="pricing-one" class="bg-white rounded p-5">
-                                <h1 class="text-4 font-bold text-center text-green-600">$10/ month Basic</h1>
+                            <div class="bg-white rounded p-5">
+                                <h1 id="pricing-one" class="text-4 font-bold text-center text-green-600"></h1>
                             </div>
-                            <div id="pricing-one" class="bg-white rounded p-5">
-                                <h1 class="text-4 font-bold text-center text-amber-500">$10/ month Basic</h1>
+                            <div class="bg-white rounded p-5">
+                                <h1 id="pricing-two" class="text-4 font-bold text-center text-amber-500"></h1>
                             </div>
-                            <div id="pricing-one" class="bg-white rounded p-5">
-                                <h1 class="text-4 font-bold text-center text-rose-600">$10/ month Basic</h1>
+                            <div class="bg-white rounded p-5">
+                                <h1 id="pricing-three" class="text-4 font-bold text-center text-rose-600"></h1>
                             </div>
                         </div>
 
                         <!-- modal footer -->
-                        <div id="pricing-wrapper" class="grid grid-cols-2 gap-2">
+                        <div id="pricing-wrapper" class="grid grid-cols-2 gap-2 mt-3">
                             <div>
-                                <h1 class="text-2xl font bold">Features</h1>
-                                <ul class="list-disc list-decimal">
-                                    <li>Customizable responses</li>
-                                    <li>Customizable responses</li>
-                                    <li>Customizable responses</li>
+                                <h1 class="text-2xl font-bold">Features</h1>
+                                <ul id="features-container" class="list-disc list-decimal">
+                                    
                                 </ul>
                             </div>
                             <div>
-                                <h1 class="text-2xl font bold">Integrations</h1>
-                                <ul class="list-disc list-decimal">
-                                    <li>Customizable responses</li>
-                                    <li>Customizable responses</li>
-                                    <li>Customizable responses</li>
+                                <h1 class="text-2xl font-bold">Integrations</h1>
+                                <ul id="integrations-container" class="list-disc list-decimal">
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -87,11 +83,11 @@
                 <div id="modal-right">
                     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-5 relative">
                         <div id="img">
-                            <div class="accuracy badge badge-secondary absolute right-7	top-7">
-                                <p>94% accuracy</p>
+                            <div id="accuracy-wrapper" class="accuracy badge badge-secondary absolute right-7	top-7">
+                                <p><span id="accuracy-score">94%</span> accuracy</p>
                             </div>
                             <a href="#">
-                                <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+                                <img id="modal-image" class="rounded-t-lg" src="" alt="" />
                             </a>
                         </div>
                         <div class="p-5 text-center">

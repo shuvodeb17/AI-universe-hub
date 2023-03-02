@@ -62,16 +62,86 @@ const seeMoreBtn = () => {
     .then((res) => res.json())
     .then((data) => displayData(data.data.tools));
 };
-loadData();
 
 // card details
 const details = (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => showDetails(data.data));
+    .then((data) => {
+      showDetails(data.data);
+      console.log(data.data);
+    });
 };
+
 const showDetails = (details) => {
-  const { description } = details;
-  console.log(details);
+  const { description, pricing, features, integrations, image_link, accuracy } =
+    details;
+
+  if (pricing === null) {
+    document.getElementById("modal-left-description").innerText = description;
+    document.getElementById("pricing-one").innerText = "Free of Cost/Basic";
+    document.getElementById("pricing-two").innerText = "Free of Cost/pro";
+    document.getElementById("pricing-three").innerText =
+      "Free of Cost/Enterprice";
+  } else {
+    document.getElementById("modal-left-description").innerText = description;
+    document.getElementById(
+      "pricing-one"
+    ).innerText = `${pricing[0].price} ${pricing[0].plan}`;
+    document.getElementById(
+      "pricing-two"
+    ).innerText = `${pricing[1].price} ${pricing[1].plan}`;
+    document.getElementById(
+      "pricing-three"
+    ).innerText = `${pricing[2].price} ${pricing[2].plan}`;
+  }
+  //   console.log(features);
+
+  // show all features
+  const featuresContainer = document.getElementById("features-container");
+  featuresContainer.innerHTML = "";
+  for (const feature in features) {
+    const featuresName = features[feature].feature_name;
+    const createElement = document.createElement("li");
+    createElement.innerHTML = `
+        <li>${featuresName ? featuresName : "No data Found"}</li>
+    `;
+    featuresContainer.appendChild(createElement);
+  }
+
+  //   show all integrations
+  const integrationsContainer = document.getElementById(
+    "integrations-container"
+  );
+  integrationsContainer.innerHTML = "";
+  if (integrations === null) {
+    const createElement = document.createElement("li");
+    createElement.innerHTML = `
+            <li>No data found</li>
+    
+        `;
+    integrationsContainer.appendChild(createElement);
+  } else {
+    integrations?.forEach((integration) => {
+      const createElement = document.createElement("li");
+      createElement.innerHTML = `
+            <li>${integration}</li>
+    
+        `;
+      integrationsContainer.appendChild(createElement);
+    });
+  }
+
+  //   modal right side
+  document.getElementById("modal-image").src = image_link[0];
+  const accuracyWrapper = document.getElementById("accuracy-wrapper");
+  if (accuracy.score === null) {
+    accuracyWrapper.classList.add("hidden");
+    accuracy.style.di;
+  } else {
+    accuracyWrapper.classList.remove("hidden");
+    document.getElementById("accuracy-score").innerText = accuracy.score;
+  }
 };
+loadData();
