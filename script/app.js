@@ -9,6 +9,7 @@ const loadData = () => {
 // display UI
 const displayData = (allData) => {
   const cardContainer = document.getElementById("card-container");
+  cardContainer.textContent = "";
   allData.forEach((data) => {
     const { name, image, features, published_in } = data;
 
@@ -48,5 +49,13 @@ const displayData = (allData) => {
     cardContainer.appendChild(createElement);
     console.log(data);
   });
+};
+
+// show more button
+const seeMoreBtn = () => {
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayData(data.data.tools));
 };
 loadData();
