@@ -1,4 +1,14 @@
+/* spinner */
+#spinner {
+  top: 50%;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  right: 0px;
+}
+
+/* card image */
 img {
-  height: 31vh;
+  height: 31vh !important;
   width: 100%;
 }

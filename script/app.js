@@ -47,7 +47,10 @@ const displayData = (allData) => {
         </div>
     `;
     cardContainer.appendChild(createElement);
-    console.log(data);
+
+    // spinner
+    const spinner = document.getElementById("spinner");
+    spinner.classList.add("hidden");
   });
 };
 
