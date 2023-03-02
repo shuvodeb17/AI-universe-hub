@@ -11,7 +11,7 @@ const displayData = (allData) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.textContent = "";
   allData.forEach((data) => {
-    const { name, image, features, published_in } = data;
+    const { name, image, features, published_in, id } = data;
 
     const createElement = document.createElement("div");
     createElement.innerHTML = `
@@ -38,9 +38,10 @@ const displayData = (allData) => {
                         <p class="inline">${published_in}</p>
                     </div>
                     <div class="right">
-                        <div class="bg-[#FEF7F7] h-10 w-10 flex items-center justify-center rounded-full cursor-pointer">
+                        <label for="my-modal-5" class="bg-[#FEF7F7] h-10 w-10 flex items-center justify-center rounded-full cursor-pointer" onclick='details("${id}")'>
                             <i class="fa-solid fa-arrow-right text-[#F29393]"></i>
-                        </div>
+                        </label>
+
                     </div>
                 </div>
             </div>
@@ -62,3 +63,15 @@ const seeMoreBtn = () => {
     .then((data) => displayData(data.data.tools));
 };
 loadData();
+
+// card details
+const details = (id) => {
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => showDetails(data.data));
+};
+const showDetails = (details) => {
+  const { description } = details;
+  console.log(details);
+};
