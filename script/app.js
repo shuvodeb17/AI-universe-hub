@@ -1,9 +1,13 @@
+let storeData;
 // load data
 const loadData = () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayData(data.data.tools.slice(0, 6)));
+    .then((data) => {
+      storeData = data.data.tools.slice(0, 6);
+      displayData(data.data.tools.slice(0, 6));
+    });
 };
 
 // display UI
@@ -52,13 +56,37 @@ const displayData = (allData) => {
   });
 };
 
+
+
 // show more button
 const seeMoreBtn = () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayData(data.data.tools));
+    .then((data) => {
+      storeData = data.data.tools;
+      displayData(data.data.tools);
+    });
+    const showMoreButton = document.getElementById('show-more-buton');
+    showMoreButton.classList.add('hidden');
 };
+
+
+
+// sort button
+const sortByDateBtn = () => {
+  const allData = storeData;
+  allData.sort((a, b) =>
+    a.published_in > b.published_in
+      ? 1
+      : b.published_in > a.published_in
+      ? -1
+      : 0
+  );
+  displayData(allData);
+};
+
+
 
 // card details
 const details = (id) => {
@@ -70,18 +98,13 @@ const details = (id) => {
     });
 };
 
+
+
 // show details
 const showDetails = (details) => {
-  const {
-    description,
-    pricing,
-    features,
-    integrations,
-    image_link,
-    accuracy,
-    input_output_examples,
-  } = details;
+  const {description,pricing,features,integrations,image_link,accuracy,input_output_examples,} = details;
 
+  // display price
   if (pricing === null) {
     document.getElementById("modal-left-description").innerText = description;
     document.getElementById("pricing-one").innerText = "Free of Cost/Basic";
@@ -146,7 +169,6 @@ const showDetails = (details) => {
     document.getElementById("accuracy-score").innerText = accuracy.score;
   }
 
-  console.log(details);
   // show input and output
   if (input_output_examples === null) {
     const modalInputOutputWrapper = document.getElementById(
