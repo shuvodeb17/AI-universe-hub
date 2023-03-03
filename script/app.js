@@ -174,23 +174,42 @@ const showDetails = (details) => {
     const modalInputOutputWrapper = document.getElementById(
       "modal-right-input-output-wrapper"
     );
-    modalInputOutputWrapper.innerHTML = "No data found";
+    modalInputOutputWrapper.innerHTML = "No! Not Yet! Take a break!!!";
   } else {
     const modalInputOutputWrapper = document.getElementById(
       "modal-right-input-output-wrapper"
     );
+    
+    let getId = details.id
     modalInputOutputWrapper.innerHTML = "";
     input_output_examples?.slice(0, 1).forEach((inputAndOutput) => {
       const { input, output } = inputAndOutput;
+
       const createDiv = document.createElement("div");
-      createDiv.innerHTML += `
+      if(getId==='10'){
+        createDiv.innerHTML += `
+        <a href="#">
+          <h5 id="modal-right-input" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${input}</h5>
+        </a>
+        <p id="modal-right-output" class="mb-3 font-normal text-gray-700 dark:text-gray-400">${string('No! Not Yet! Take a break!!!')}</p>
+      `;
+      modalInputOutputWrapper.appendChild(createDiv);
+      }else{
+        createDiv.innerHTML += `
         <a href="#">
           <h5 id="modal-right-input" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${input}</h5>
         </a>
         <p id="modal-right-output" class="mb-3 font-normal text-gray-700 dark:text-gray-400">${output}</p>
       `;
       modalInputOutputWrapper.appendChild(createDiv);
+      }
     });
   }
 };
+
 loadData();
+
+
+function string(str) {
+  return str;
+}
