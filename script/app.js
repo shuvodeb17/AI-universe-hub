@@ -28,9 +28,7 @@ const displayData = (allData) => {
                     <li>${features[1] ? features[1] : "Not found"}</li>
                     <li>${features[2] ? features[2] : "Not found"}</li>
                 </ol>
-
                 <hr class="mt-3 mb-3">
-
                 <div id="card-footer" class="flex items-center justify-between">
                     <div class="left">
                         <h2 class="text-2xl font-bold">${name}</h2>
@@ -41,7 +39,6 @@ const displayData = (allData) => {
                         <label for="my-modal-5" class="bg-[#FEF7F7] h-10 w-10 flex items-center justify-center rounded-full cursor-pointer" onclick='details("${id}")'>
                             <i class="fa-solid fa-arrow-right text-[#F29393]"></i>
                         </label>
-
                     </div>
                 </div>
             </div>
@@ -70,13 +67,20 @@ const details = (id) => {
     .then((res) => res.json())
     .then((data) => {
       showDetails(data.data);
-      console.log(data.data);
     });
 };
 
+// show details
 const showDetails = (details) => {
-  const { description, pricing, features, integrations, image_link, accuracy } =
-    details;
+  const {
+    description,
+    pricing,
+    features,
+    integrations,
+    image_link,
+    accuracy,
+    input_output_examples,
+  } = details;
 
   if (pricing === null) {
     document.getElementById("modal-left-description").innerText = description;
@@ -96,7 +100,6 @@ const showDetails = (details) => {
       "pricing-three"
     ).innerText = `${pricing[2].price} ${pricing[2].plan}`;
   }
-  //   console.log(features);
 
   // show all features
   const featuresContainer = document.getElementById("features-container");
@@ -138,10 +141,34 @@ const showDetails = (details) => {
   const accuracyWrapper = document.getElementById("accuracy-wrapper");
   if (accuracy.score === null) {
     accuracyWrapper.classList.add("hidden");
-    accuracy.style.di;
   } else {
     accuracyWrapper.classList.remove("hidden");
     document.getElementById("accuracy-score").innerText = accuracy.score;
+  }
+
+console.log(details)
+  // show input and output
+  if (input_output_examples === null) {
+    const modalInputOutputWrapper = document.getElementById(
+      "modal-right-input-output-wrapper"
+    );
+    modalInputOutputWrapper.innerHTML = "No data found";
+  } else {
+    const modalInputOutputWrapper = document.getElementById(
+      "modal-right-input-output-wrapper"
+    );
+    modalInputOutputWrapper.innerHTML = "";
+    input_output_examples?.slice(0, 1).forEach((inputAndOutput) => {
+      const { input, output } = inputAndOutput;
+      const createDiv = document.createElement("div");
+      createDiv.innerHTML += `
+        <a href="#">
+          <h5 id="modal-right-input" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${input}</h5>
+        </a>
+        <p id="modal-right-output" class="mb-3 font-normal text-gray-700 dark:text-gray-400">${output}</p>
+      `;
+      modalInputOutputWrapper.appendChild(createDiv);
+    });
   }
 };
 loadData();
