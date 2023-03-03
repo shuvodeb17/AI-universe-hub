@@ -15,7 +15,7 @@ const displayData = (allData) => {
 
     const createElement = document.createElement("div");
     createElement.innerHTML = `
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img class="rounded-t-lg p-5" src="${image}" alt="" />
             </a>
@@ -146,7 +146,7 @@ const showDetails = (details) => {
     document.getElementById("accuracy-score").innerText = accuracy.score;
   }
 
-console.log(details)
+  console.log(details);
   // show input and output
   if (input_output_examples === null) {
     const modalInputOutputWrapper = document.getElementById(
